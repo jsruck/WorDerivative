@@ -31,8 +31,16 @@ class Call():
     def show_price_plot(self, range:list=None) -> None:
         if not range:
             range = self.strike_thresholds
+        
+        # Plot real price points in grey
+        x_real = self._data["strike"]
+        y_real = self._data["price"]
+        plt.scatter(x_real, y_real, c="grey")
+
+        # Overlay approximated call price function in blue
         x = np.linspace(range[0], range[1], CALL_PRICE_PLOT_DENSITY)
         y = np.fromiter(map(self.price, x), dtype=np.float64)
         plt.xlabel("Strike price")
         plt.ylabel("Approximated call price")
-        plt.scatter(x, y)
+        plt.plot(x, y)
+
