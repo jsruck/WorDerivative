@@ -32,10 +32,11 @@ class Call():
         if not range:
             range = self.strike_thresholds
         
-        # Plot real price points in grey
+        # Plot real price points in grey and a vertical line, that indicates the trading price of the underlying at the time of the snapshot
         x_real = self._data["strike"]
         y_real = self._data["price"]
         plt.scatter(x_real, y_real, c="grey")
+        plt.axvline(x=self.meta["Underlying price during call snapshot"], c="grey")
 
         # Overlay approximated call price function in blue
         x = np.linspace(range[0], range[1], CALL_PRICE_PLOT_DENSITY)
