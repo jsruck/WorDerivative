@@ -28,7 +28,7 @@ class Call():
         strike_powers = np.array([strike**i for i in range(self.degree_of_approx - 2, -1, -1)])
         return self._derivative_matrix @ strike_powers
 
-    def show_price_plot(self, range:list=None) -> None:
+    def plot_price_chart(self, range:list=None) -> None:
         if not range:
             range = self.strike_thresholds
         
