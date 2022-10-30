@@ -50,7 +50,7 @@ class WorDerivative():
         if x_boundaries is None:
             x_boundaries = [self.mid_price - self.price_range/2, self.mid_price + self.price_range/2]
 
-        x = np.linspace(x_boundaries[0], x_boundaries[1], DERIVATIVE_PAYOFF_PLOT_DENSITY)
+        x = np.linspace(x_boundaries[0], x_boundaries[1], WORDERIVATIVE_PAYOFF_PLOT_DENSITY)
 
         support_intervals = [[self._price_points[i] - MARKER_WIDTH / 2, self._price_points[i] + MARKER_WIDTH /2] for i in range(len(self._price_points))]
         if not aggregated:
@@ -61,7 +61,7 @@ class WorDerivative():
                 plt.scatter([xe] * len(ye), ye, c='black')
         else:
             y = np.fromiter(map(lambda x: payoff_plot_helper.payoff_aggregated_form(x, support_intervals=support_intervals, asset_payoff=self._asset_payoff), x), dtype=np.float64)
-            plt.scatter(x, y)
+            plt.scatter(x, y, c="black")
 
         plt.xlabel(f"Price of the underlying {self.call.meta['Underlying asset']} on {self.call.meta['Call expiration date']}")
         plt.ylabel("Derivative payoff" if not aggregated else "Derivative payoff (aggregated)")

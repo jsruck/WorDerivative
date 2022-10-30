@@ -70,7 +70,7 @@ class Call():
         # Overlay approximated call price function in blue
         x = np.linspace(range[0], range[1], CALL_PRICE_PLOT_DENSITY)
         y = np.fromiter(map(self.price, x), dtype=np.float64)
-        plt.xlabel(CALL_PRICE_CHART_XLABEL)
-        plt.ylabel(CALL_PRICE_CHART_YLABEL)
+        plt.xlabel(CALL_PRICE_PLOT_XLABEL)
+        plt.ylabel(CALL_PRICE_PLOT_YLABEL)
         plt.plot(x, y)
 
