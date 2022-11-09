@@ -11,16 +11,16 @@ from optionpricing import Call
 class WorDerivative():
     def __init__(self, word:str, mid_price:float, price_range:float, letter_height_scaling:float=1., call_data_path:str=OPTION_PRICE_DATA_PATH, call_pricing_degree_of_approx:int=4, call_pricing_strike_thresholds:list=None) -> None:
         self.word = word.upper()
-        self.mid_price = mid_price # Determines the underlying price around which the price will be centered
-        self.price_range = price_range # Determines the width of the text across underlying prices
-        self.letter_scaling = letter_height_scaling # Determines the height of the letter payoffs
+        self.mid_price = mid_price # Determines the underlying price around which the text will be centered
+        self.price_range = price_range # Determines the width of the text across the underlying asset's prices
+        self.letter_scaling = letter_height_scaling # Scales the height of the letter payoffs
         
         self._letters = pd.read_excel(LETTER_REF_FILE_PATH, header=None)
         self.call = Call(call_data_path, call_pricing_degree_of_approx, call_pricing_strike_thresholds)
 
         self._word_matrix = self._build_word_matrix()
         self._asset_payoff = (self.letter_scaling * np.diag(np.array(np.linspace(1, 0, LETTER_MATRIX_SIZE))) @ self._word_matrix).sum(axis=0) # Aggregates the payoff at each point to a sum of the payoffs and multiplies that by the scaling factor
-        self._price_points = self._generate_support_point_range(len(self.word), self.mid_price, self.price_range) # Determines the width of the text
+        self._price_points = self._generate_support_point_range(len(self.word), self.mid_price, self.price_range) # Determines the width of the text to reduce the sum over infinitely many block-intervalls to a finite number of support intervalls
         self.price = self._get_derivative_price(self._asset_payoff, self._price_points) 
 
     def _get_letter_matrix(self, letter:str) -> np.array:
