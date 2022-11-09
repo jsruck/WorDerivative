@@ -22,7 +22,7 @@ As described in the literature mentioned above, the price for the digital approx
 $\sum_i^{\infty}{g(K_i)^*call''_{t,T}(K_i)}*\Delta K$,
 where $g(K_i)$ is the of a generic derivative that would be payed out, if the price of the underlying asset ends up at $K_i$. $K_i$ is the midpoint of the $i$-th block, $call''_{t,T}(K_i)$ is the second derivative of a call option with a strike price at $K_i$ and $\Delta K = K_{i+1} - K_i$ is the (uniform) width of each block.
 
-This project provides a simple application of this concept: it prices a claim that takes a discrete, textual payoff. For that, it aggregates all payout levels for each $K_i$ and prices the resulting payoff using the formula above.
+This project provides a simple application of this concept: it prices a claim to a discrete, textual payoff.
 
 **Practical implications** </br>
 As of today, I have found neither any particularily useful nor financially reasonable application for this tool, except for constructing and pricing textual portfolios as a (personal, albeit admittedly eccentric) gift for special occasions.
@@ -44,7 +44,7 @@ There are two main objects in this project. This section will describe their par
 
 ### WorDerivative
 
-This is the derivative described above. 
+This is the derivative described above.
 
 **Settings/properties include:**
 
